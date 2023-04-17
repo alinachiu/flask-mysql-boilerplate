@@ -140,6 +140,27 @@ def recommend_meal_plan(expert_id, user_id):
 
     return "Success!"
 
+# Expert updates a user's meal plan in their list of recommended meal plans
+@health_experts.route('/mealplans/<user_id>/<meal_plan_id>', methods=['PUT'])
+def update_meal_plan(user_id, meal_plan_id):
+    # collecting data from the request object
+    data = request.json
+
+    # extracting the text body
+    start_date = data['new_start_date']
+
+    # constructing the query
+    query = 'update MealPlan set start_date = "'
+    query += start_date + '" where user_id = '
+    query += user_id + ' and meal_plan_id = ' + meal_plan_id
+
+    # executing and committing the update statement
+    cursor = db.get_db().cursor()
+    cursor.execute(query)
+    db.get_db().commit()
+
+    return "Success!"
+
 # Expert unrecommends a user's meal plan from their list of recommended meal plans
 @health_experts.route('/mealplans/<user_id>/<meal_plan_id>', methods=['DELETE'])
 def unrecommend_meal_plan(user_id, meal_plan_id):

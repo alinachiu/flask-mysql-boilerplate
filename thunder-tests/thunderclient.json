@@ -125,5 +125,24 @@
     "headers": [],
     "params": [],
     "tests": []
+  },
+  {
+    "_id": "7151ae03-d217-4fb9-898d-ad4ddd132991",
+    "colId": "b3af7c62-cda5-4cd5-b346-be3717f111c7",
+    "containerId": "",
+    "name": "TestUpdateMealPlan",
+    "url": "localhost:8001/h/mealplans/101/1",
+    "method": "PUT",
+    "sortNum": 90000,
+    "created": "2023-04-17T19:25:49.811Z",
+    "modified": "2023-04-17T19:27:27.884Z",
+    "headers": [],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "{\n  \"new_start_date\" : \"2022-04-18\"\n}",
+      "form": []
+    },
+    "tests": []
   }
 ]
