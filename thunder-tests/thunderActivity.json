@@ -1,1 +1,16 @@
-[]
+[
+  {
+    "_id": "c4b00f2b-2b1a-4da2-90ce-61b96f093239",
+    "colId": "history",
+    "containerId": "",
+    "name": "localhost:8001/h/mealplans",
+    "url": "localhost:8001/h/mealplans",
+    "method": "GET",
+    "sortNum": 0,
+    "created": "2023-04-17T18:53:54.824Z",
+    "modified": "2023-04-17T18:53:54.824Z",
+    "headers": [],
+    "params": [],
+    "tests": []
+  }
+]
