@@ -173,3 +173,19 @@ def unrecommend_meal_plan(user_id, meal_plan_id):
     db.get_db().commit()
 
     return "Success!"
+
+# Gets all meal plans from an expert for a user
+@health_experts.route('/mealplans/<expert_id>/<user_id>', methods=['GET'])
+def get_meal_plans(expert_id, user_id):
+    cursor = db.get_db().cursor()
+    cursor.execute('select u.first_name as "User First Name", u.last_name as "User Last Name", h.first_name as "Expert First Name", h.last_name as "Expert Last Name", m.start_date, m.end_date from MealPlan m\
+        join HealthExpert h on m.dietitian_id = h.expert_id join User u on m.user_id = u.user_id')
+    row_headers = [x[0] for x in cursor.description]
+    json_data = []
+    theData = cursor.fetchall()
+    for row in theData:
+        json_data.append(dict(zip(row_headers, row)))
+    the_response = make_response(jsonify(json_data))
+    the_response.status_code = 200
+    the_response.mimetype = 'application/json'
+    return the_response

@@ -144,5 +144,19 @@
       "form": []
     },
     "tests": []
+  },
+  {
+    "_id": "9fd2b486-4d5c-476e-8392-8174d92f5e90",
+    "colId": "b3af7c62-cda5-4cd5-b346-be3717f111c7",
+    "containerId": "",
+    "name": "TestGetMealPlans",
+    "url": "localhost:8001/h/mealplans/201/101",
+    "method": "GET",
+    "sortNum": 100000,
+    "created": "2023-04-17T19:55:19.700Z",
+    "modified": "2023-04-17T19:55:32.052Z",
+    "headers": [],
+    "params": [],
+    "tests": []
   }
 ]
