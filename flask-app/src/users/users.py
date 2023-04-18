@@ -45,10 +45,8 @@ def get_restriction_recipe(restriction_id):
     return the_response
 
 # Return a filtered list of recipes that include the ingredient
-
-
 @users.route('/recipes/<ingredient_id>', methods=['GET'])
-def get_restriction_recipe(ingredient_id):
+def get_ingredient_recipe(ingredient_id):
     cursor = db.get_db().cursor()
     cursor.execute('select name, description, preperation_time, cooking_time, serving_size, image_url, source_url,\
                    calories, carbohydrates, protein, fat, sodium, fiber, sugar \
@@ -71,7 +69,7 @@ def get_restriction_recipe(ingredient_id):
 def get_meal_plans(expert_id, user_id):
     cursor = db.get_db().cursor()
     cursor.execute('select u.first_name as "User First Name", u.last_name as "User Last Name", h.first_name as "Expert First Name", h.last_name as "Expert Last Name", m.start_date, m.end_date from MealPlan m\
-        join HealthExpert h on m.dietitian_id = h.expert_id join User u on m.user_id = u.user_id')
+        join HealthExpert h on m.dietitian_id = h.expert_id join User u on m.user_id = u.user_id where m.dietitian_id = ' + str(expert_id) + ' and m.user_id = ' + str(user_id))
     row_headers = [x[0] for x in cursor.description]
     json_data = []
     theData = cursor.fetchall()

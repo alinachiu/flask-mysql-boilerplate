@@ -122,14 +122,16 @@ def recommend_meal_plan(expert_id, user_id):
 
     # extracting the variables
     start_date = data['start_date']
+    end_date = data['end_date']
 
     # constructing the query
     set_key_query = 'set @new_key := (SELECT meal_plan_id FROM MealPlan ORDER BY meal_plan_id DESC LIMIT 1)'
     select_key_query = 'select @new_key'
-    query = 'insert into MealPlan (meal_plan_id, dietitian_id, user_id, start_date) values (@new_key + 1, '
+    query = 'insert into MealPlan (meal_plan_id, dietitian_id, user_id, start_date, end_date) values (@new_key + 1, '
     query += expert_id + ', '
     query += user_id + ', "'
-    query += start_date + '")'
+    query += start_date + '", "'
+    query += end_date + '")'
 
     # executing and committing the insert statement
     cursor = db.get_db().cursor()
@@ -148,10 +150,12 @@ def update_meal_plan(user_id, meal_plan_id):
 
     # extracting the text body
     start_date = data['new_start_date']
+    end_date = data['new_end_date']
 
     # constructing the query
     query = 'update MealPlan set start_date = "'
-    query += start_date + '" where user_id = '
+    query += start_date + '", end_date = "'
+    query += end_date + '" where user_id = '
     query += user_id + ' and meal_plan_id = ' + meal_plan_id
 
     # executing and committing the update statement
@@ -179,7 +183,7 @@ def unrecommend_meal_plan(user_id, meal_plan_id):
 def get_meal_plans(expert_id, user_id):
     cursor = db.get_db().cursor()
     cursor.execute('select u.first_name as "User First Name", u.last_name as "User Last Name", h.first_name as "Expert First Name", h.last_name as "Expert Last Name", m.start_date, m.end_date from MealPlan m\
-        join HealthExpert h on m.dietitian_id = h.expert_id join User u on m.user_id = u.user_id')
+        join HealthExpert h on m.dietitian_id = h.expert_id join User u on m.user_id = u.user_id where m.dietitian_id = ' + str(expert_id) + ' and m.user_id = ' + str(user_id))
     row_headers = [x[0] for x in cursor.description]
     json_data = []
     theData = cursor.fetchall()
