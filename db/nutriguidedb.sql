@@ -1,6 +1,12 @@
 -- Create a new database called nutriguidedb
 CREATE DATABASE nutriguidedb;
 
+-- Via the Docker Compose file, a special user called webapp will 
+-- be created in MySQL. We are going to grant that user 
+-- all privilages to the new database we just created. 
+grant all privileges on nutriguidedb.* to 'webapp'@'%';
+flush privileges;
+
 -- Set NutriGuideDB as the current database. All subsequent
 -- commands will be executed in the context of NutriGuideDB
 USE nutriguidedb;
