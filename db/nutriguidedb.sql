@@ -857,8 +857,8 @@ INSERT INTO HealthExpert(expert_id,first_name,last_name,email,gender,username,pa
 INSERT INTO HealthExpert(expert_id,first_name,last_name,email,gender,username,password,date_of_birth,years_of_experience,biography,degree) VALUES (96127,'Sally','Armatidge','sarmatidge5j@acquirethisname.com','Other','sarmatidge5j','wmVx9DrZg','1984-07-25',17,'Aenean sit amet justo. Morbi ut odio.','Masters of Science');
 
 INSERT INTO Goal(goal_name,goal_id) VALUES ('muscle gain',9);
-INSERT INTO Goal(goal_name,goal_id) VALUES ('loose fat',8);
-INSERT INTO Goal(goal_name,goal_id) VALUES ('loose weight',12);
+INSERT INTO Goal(goal_name,goal_id) VALUES ('lose fat',8);
+INSERT INTO Goal(goal_name,goal_id) VALUES ('lose weight',12);
 INSERT INTO Goal(goal_name,goal_id) VALUES ('maintain muscle',14);
 INSERT INTO Goal(goal_name,goal_id) VALUES ('gain weight',10);
 INSERT INTO Goal(goal_name,goal_id) VALUES ('eat healthy',24);
