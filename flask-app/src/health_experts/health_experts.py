@@ -9,7 +9,7 @@ health_experts = Blueprint('health_experts', __name__)
 @health_experts.route('/nutritionaladviceposts', methods=['GET'])
 def get_posts():
     cursor = db.get_db().cursor()
-    cursor.execute('select n.title, h.first_name,\
+    cursor.execute('select distinct n.title, h.first_name,\
         h.last_name from NutritionalAdvice n join HealthExpert h on n.author_id = h.expert_id')
     row_headers = [x[0] for x in cursor.description]
     json_data = []
@@ -49,8 +49,8 @@ def add_new_post():
 @health_experts.route('/nutritionaladviceposts/<author_id>', methods=['GET'])
 def get_author_posts(author_id):
     cursor = db.get_db().cursor()
-    cursor.execute('select n.title, h.first_name,\
-        h.last_name from NutritionalAdvice n join HealthExpert h on n.author_id = h.expert_id\
+    cursor.execute('select distinct n.title, h.first_name,\
+        h.last_name, n.post_id from NutritionalAdvice n join HealthExpert h on n.author_id = h.expert_id\
                    where n.author_id =' + str(author_id))
     row_headers = [x[0] for x in cursor.description]
     json_data = []
@@ -143,8 +143,8 @@ def recommend_meal_plan(expert_id, user_id):
     return "Success!"
 
 # Expert updates a user's meal plan in their list of recommended meal plans
-@health_experts.route('/mealplans/<user_id>/<meal_plan_id>', methods=['PUT'])
-def update_meal_plan(user_id, meal_plan_id):
+@health_experts.route('/mealplans/<meal_plan_id>', methods=['PUT'])
+def update_meal_plan(meal_plan_id):
     # collecting data from the request object
     data = request.json
 
@@ -155,8 +155,8 @@ def update_meal_plan(user_id, meal_plan_id):
     # constructing the query
     query = 'update MealPlan set start_date = "'
     query += start_date + '", end_date = "'
-    query += end_date + '" where user_id = '
-    query += user_id + ' and meal_plan_id = ' + meal_plan_id
+    query += end_date + '" where meal_plan_id = '
+    query += meal_plan_id
 
     # executing and committing the update statement
     cursor = db.get_db().cursor()
@@ -166,10 +166,10 @@ def update_meal_plan(user_id, meal_plan_id):
     return "Success!"
 
 # Expert unrecommends a user's meal plan from their list of recommended meal plans
-@health_experts.route('/mealplans/<user_id>/<meal_plan_id>', methods=['DELETE'])
-def unrecommend_meal_plan(user_id, meal_plan_id):
+@health_experts.route('/mealplans/<meal_plan_id>', methods=['DELETE'])
+def unrecommend_meal_plan(meal_plan_id):
     # constructing the query
-    query = 'delete from MealPlan where user_id = ' + user_id + ' and meal_plan_id = ' + meal_plan_id
+    query = 'delete from MealPlan where meal_plan_id = ' + meal_plan_id
 
     # executing and committing the delete statement
     cursor = db.get_db().cursor()
@@ -178,12 +178,27 @@ def unrecommend_meal_plan(user_id, meal_plan_id):
 
     return "Success!"
 
-# Gets all meal plans from an expert for a user
-@health_experts.route('/mealplans/<expert_id>/<user_id>', methods=['GET'])
-def get_meal_plans(expert_id, user_id):
+# Gets all meal plans from an expert
+@health_experts.route('/mealplans/<expert_id>', methods=['GET'])
+def get_meal_plans(expert_id):
     cursor = db.get_db().cursor()
-    cursor.execute('select u.first_name as "User First Name", u.last_name as "User Last Name", h.first_name as "Expert First Name", h.last_name as "Expert Last Name", m.start_date, m.end_date from MealPlan m\
-        join HealthExpert h on m.dietitian_id = h.expert_id join User u on m.user_id = u.user_id where m.dietitian_id = ' + str(expert_id) + ' and m.user_id = ' + str(user_id))
+    cursor.execute('select u.first_name as user_first_name, u.last_name as user_last_name, h.first_name as expert_first_name, h.last_name as expert_last_name, m.start_date, m.end_date, u.user_id, m.meal_plan_id from MealPlan m\
+        join HealthExpert h on m.dietitian_id = h.expert_id join User u on m.user_id = u.user_id where m.dietitian_id = ' + str(expert_id))
+    row_headers = [x[0] for x in cursor.description]
+    json_data = []
+    theData = cursor.fetchall()
+    for row in theData:
+        json_data.append(dict(zip(row_headers, row)))
+    the_response = make_response(jsonify(json_data))
+    the_response.status_code = 200
+    the_response.mimetype = 'application/json'
+    return the_response
+
+# Gets all NutriGuide users
+@health_experts.route('/users', methods=['GET'])
+def get_users():
+    cursor = db.get_db().cursor()
+    cursor.execute('select distinct u.first_name, u.last_name, u.user_id from User u')
     row_headers = [x[0] for x in cursor.description]
     json_data = []
     theData = cursor.fetchall()
