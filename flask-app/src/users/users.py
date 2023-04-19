@@ -22,6 +22,21 @@ def get_author_posts(author_id):
     the_response.mimetype = 'application/json'
     return the_response
 
+# Return a list of all dietary restrictions
+@users.route('/recipesrestriction', methods=['GET'])
+def get_restrictions():
+    cursor = db.get_db().cursor()
+    cursor.execute('select * from DietaryRestriction')
+    row_headers = [x[0] for x in cursor.description]
+    json_data = []
+    theData = cursor.fetchall()
+    for row in theData:
+        json_data.append(dict(zip(row_headers, row)))
+    the_response = make_response(json.dumps(json_data, indent = 4, sort_keys = True, default = str))
+    the_response.status_code = 200
+    the_response.mimetype = 'application/json'
+    return the_response
+
 # Return a filtered list of recipes that people with dietary restriction can eat
 @users.route('/recipesrestriction/<restriction_id>', methods=['GET'])
 def get_restriction_recipe(restriction_id):
