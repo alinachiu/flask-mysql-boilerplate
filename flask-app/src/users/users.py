@@ -73,6 +73,21 @@ def get_ingredient_recipe(ingredient_id):
     the_response.mimetype = 'application/json'
     return the_response
 
+# Return a list of all dietary restrictions
+@users.route('/recipesingredient', methods=['GET'])
+def get_ingredients():
+    cursor = db.get_db().cursor()
+    cursor.execute('select distinct * from Ingredient')
+    row_headers = [x[0] for x in cursor.description]
+    json_data = []
+    theData = cursor.fetchall()
+    for row in theData:
+        json_data.append(dict(zip(row_headers, row)))
+    the_response = make_response(json.dumps(json_data, indent = 4, sort_keys = True, default = str))
+    the_response.status_code = 200
+    the_response.mimetype = 'application/json'
+    return the_response
+
 # Gets all meal plans from an expert for a user
 @users.route('/mealplans/<expert_id>/<user_id>', methods=['GET'])
 def get_meal_plans(expert_id, user_id):
