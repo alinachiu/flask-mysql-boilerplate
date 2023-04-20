@@ -155,7 +155,7 @@ CREATE TABLE UserGoal (
 );
 
 INSERT INTO User(user_id,first_name,last_name,email,gender,height,username,password,weight,date_of_birth,activity_level) VALUES (243384,'Sandi','Peres','speres0@craigslist.org','Male',8.3,'speres0','a78Jx9',58.0,'2016/10/01','Moderately Active');
-INSERT INTO User(user_id,first_name,last_name,email,gender,height,username,password,weight,date_of_birth,activity_level) VALUES (802267,'Bobina','Corrison','bcorrison1@blogger.com','Male',7.7,'bcorrison1','tUO6io',100.73,'1953/10/11','Sedentary');
+INSERT INTO User(user_id,first_name,last_name,email,gender,height,username,password,weight,date_of_birth,activity_level) VALUES (802267,'Anthony','Jones','bcorrison1@blogger.com','Male',7.7,'bcorrison1','tUO6io',100.73,'1953/10/11','Sedentary');
 INSERT INTO User(user_id,first_name,last_name,email,gender,height,username,password,weight,date_of_birth,activity_level) VALUES (870253,'Fan','Patmore','fpatmore2@webeden.co.uk','Other',8.3,'fpatmore2','ua5vK5vt4',708.83,'2010/08/07','Sedentary');
 INSERT INTO User(user_id,first_name,last_name,email,gender,height,username,password,weight,date_of_birth,activity_level) VALUES (248510,'Vikky','Vauter','vvauter3@pinterest.com','Female',5.5,'vvauter3','UrqIcKlqgO',235.83,'2001/10/11','Sedentary');
 INSERT INTO User(user_id,first_name,last_name,email,gender,height,username,password,weight,date_of_birth,activity_level) VALUES (439889,'Veronika','Scorthorne','vscorthorne4@moonfruit.com','Other',5.0,'vscorthorne4','i0nvxncoyt',710.07,'1953/08/17','Sedentary');
@@ -3752,6 +3752,8 @@ INSERT INTO UserGoal(user_id,goal_id) VALUES (465089,10);
 INSERT INTO UserGoal(user_id,goal_id) VALUES (452398,9);
 INSERT INTO UserGoal(user_id,goal_id) VALUES (479197,9);
 INSERT INTO UserGoal(user_id,goal_id) VALUES (802267,9);
+INSERT INTO UserGoal(user_id,goal_id) VALUES (802267,10);
+INSERT INTO UserGoal(user_id,goal_id) VALUES (802267,14);
 INSERT INTO UserGoal(user_id,goal_id) VALUES (427285,10);
 INSERT INTO UserGoal(user_id,goal_id) VALUES (102014,12);
 INSERT INTO UserGoal(user_id,goal_id) VALUES (313784,14);
