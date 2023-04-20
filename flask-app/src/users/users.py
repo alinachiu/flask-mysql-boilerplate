@@ -187,7 +187,7 @@ def get_all_user_goals(user_id):
     the_response.mimetype = 'application/json'
     return the_response
 
-# Generate a new user goal for the user
+# Generate a new user goal for the selected user
 @users.route('/usergoals/<user_id>', methods=['POST'])
 def add_new_goal(user_id):
     # collecting data from the request object
