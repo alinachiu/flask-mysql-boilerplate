@@ -2927,7 +2927,7 @@ INSERT INTO RecipeDietaryRestriction(recipe_id,restriction_id) VALUES (80005,49)
 INSERT INTO RecipeDietaryRestriction(recipe_id,restriction_id) VALUES (22983,17);
 INSERT INTO RecipeDietaryRestriction(recipe_id,restriction_id) VALUES (25888,29);
 INSERT INTO RecipeDietaryRestriction(recipe_id,restriction_id) VALUES (4692,23);
-INSERT INTO RecipeDietaryRestriction(recipe_id,restriction_id) VALUES (69933,16);
+INSERT INTO RecipeDietaryRestriction(recipe_id,restriction_id) VALUES (69933,1);
 INSERT INTO RecipeDietaryRestriction(recipe_id,restriction_id) VALUES (60212,10);
 INSERT INTO RecipeDietaryRestriction(recipe_id,restriction_id) VALUES (27327,16);
 INSERT INTO RecipeDietaryRestriction(recipe_id,restriction_id) VALUES (4692,49);
