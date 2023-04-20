@@ -187,18 +187,19 @@ def get_all_user_goals(user_id):
     the_response.mimetype = 'application/json'
     return the_response
 
-# Generate a new user goal for the user
-@users.route('/usergoals/<user_id>', methods=['POST'])
-def add_new_goal(user_id):
+# Generate a new user goal for the selected user
+@users.route('/usergoals', methods=['POST'])
+def add_new_goal():
     # collecting data from the request object
     data = request.json
 
     # extracting the variables
+    user = data['user_id']
     goal = data['goal_id']
 
     # constructing the query
     query = 'insert into UserGoal (user_id, goal_id) values('
-    query += user_id + ', '
+    query += str(user) + ', '
     query += str(goal) + ')'
 
     # executing and committing the insert statement
